@@ -2,8 +2,8 @@ import { FaRegEye } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
 import { FaShareNodes } from "react-icons/fa6";
 
-const DynamicNewsCard = ({ newsData }) => {
-  console.log(newsData);
+const Card = ({ newsData }) => {
+  // console.log(newsData);
 
   // Check if newsData exists before rendering
   if (!newsData) {
@@ -11,7 +11,7 @@ const DynamicNewsCard = ({ newsData }) => {
   }
 
   return (
-    <div className="">
+    <>
       <div className="card bg-base-100 shadow-sm">
         <div className="card-actions justify-between items-center bg-gray-200 p-2">
           <div className="flex items-center gap-2">
@@ -91,8 +91,8 @@ const DynamicNewsCard = ({ newsData }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default DynamicNewsCard;
+export default Card;

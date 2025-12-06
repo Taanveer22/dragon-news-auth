@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import NewsLayout from "../layouts/NewsLayout";
-import DynamicNewsCategory from "../pages/DynamicNewsCategory";
+import CenteredContent from "../pages/CenteredContent";
 
 const PublicRoute = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const PublicRoute = createBrowserRouter([
       },
       {
         path: "/categoryType/:id",
-        element: <DynamicNewsCategory></DynamicNewsCategory>,
+        element: <CenteredContent></CenteredContent>,
         loader: ({ params }) =>
           fetch(
             `https://openapi.programming-hero.com/api/news/category/${params.id}`

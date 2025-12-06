@@ -3,7 +3,6 @@ import RightNavbar from "../components/RightNavbar";
 import Header from "../components/Header";
 import LatestNews from "../components/LatestNews";
 import Navbar from "../components/Navbar";
-import CenteredContent from "../components/CenteredContent";
 import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
@@ -30,7 +29,6 @@ const HomeLayout = () => {
           <LeftNavbar></LeftNavbar>
         </aside>
         <section className="sm:col-span-6">
-          <CenteredContent></CenteredContent>
           <Outlet></Outlet>
         </section>
         <aside className="sm:col-span-3">
