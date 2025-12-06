@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import CenterContent from "../components/dynamic/CenterContent";
 import LeftNavbar from "../components/dynamic/LeftNavbar";
 import RightNavbar from "../components/dynamic/RightNavbar";
@@ -29,6 +30,7 @@ const HomeLayout = () => {
           <LeftNavbar></LeftNavbar>
         </aside>
         <section className="col-span-3">
+          <Outlet></Outlet>
           <CenterContent></CenterContent>
         </section>
         <aside className="col-span-3">
