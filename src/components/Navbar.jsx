@@ -10,7 +10,7 @@ const Navbar = () => {
         <NavLink to="/career">Career</NavLink>
       </div>
       <div className="flex gap-2 items-center">
-        <img src={userIcon} alt="" />
+        <img src={userIcon} className="w-8" />
         <button className="btn btn-sm btn-neutral">Login</button>
       </div>
     </div>
