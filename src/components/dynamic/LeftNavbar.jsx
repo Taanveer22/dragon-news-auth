@@ -8,11 +8,13 @@ const LeftNavbar = () => {
       .then((data) => setNewsCategories(data.data.news_category));
   }, []);
 
-  console.log(newsCategories);
+  // console.log(newsCategories);
 
   return (
     <div>
-      <h1 className="text-xl font-semibold mb-5">All Category</h1>
+      <h1 className="text-xl font-semibold mb-5">
+        All Category ({newsCategories.length})
+      </h1>
 
       <div className="flex flex-col gap-4">
         {newsCategories.map((categoryItem) => (
