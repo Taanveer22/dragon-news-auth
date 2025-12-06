@@ -15,6 +15,10 @@ const PublicRoute = createBrowserRouter([
       {
         path: "/categoryType/:id",
         element: <DynamicNewsCategory></DynamicNewsCategory>,
+        loader: ({ params }) =>
+          fetch(
+            `https://openapi.programming-hero.com/api/news/category/${params.id}`
+          ),
       },
     ],
   },
