@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 
 const HomeLayout = () => {
   return (
-    <>
+    <div className="poppins-font">
       {/* ========== header ============== */}
       <header>
         <Header></Header>
@@ -22,7 +22,7 @@ const HomeLayout = () => {
       <nav className="w-11/12 mx-auto mb-6">
         <Navbar></Navbar>
       </nav>
-      
+
       {/* ================ main =================== */}
       <main className="w-11/12 mx-auto grid gap-6 grid-cols-12">
         <aside className="col-span-3">
@@ -35,7 +35,7 @@ const HomeLayout = () => {
           <RightNavbar></RightNavbar>
         </aside>
       </main>
-    </>
+    </div>
   );
 };
 
