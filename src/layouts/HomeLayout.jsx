@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
-import CenterContent from "../components/dynamic/CenterContent";
-import LeftNavbar from "../components/dynamic/LeftNavbar";
-import RightNavbar from "../components/dynamic/RightNavbar";
+import LeftNavbar from "../components/LeftNavbar";
+import RightNavbar from "../components/RightNavbar";
 import Header from "../components/Header";
 import LatestNews from "../components/LatestNews";
 import Navbar from "../components/Navbar";
+import CenteredContent from "../components/CenteredContent";
+import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
   return (
@@ -25,15 +25,15 @@ const HomeLayout = () => {
       </nav>
 
       {/* ================ main =================== */}
-      <main className="w-11/12 mx-auto grid gap-6 sm:grid-cols-12">
-        <aside className="col-span-3">
+      <main className="w-11/12 mx-auto grid gap-6 grid-cols-1 sm:grid-cols-12">
+        <aside className="sm:col-span-3">
           <LeftNavbar></LeftNavbar>
         </aside>
-        <section className="col-span-3">
+        <section className="sm:col-span-6">
+          <CenteredContent></CenteredContent>
           <Outlet></Outlet>
-          <CenterContent></CenterContent>
         </section>
-        <aside className="col-span-3">
+        <aside className="sm:col-span-3">
           <RightNavbar></RightNavbar>
         </aside>
       </main>

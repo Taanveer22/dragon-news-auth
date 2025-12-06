@@ -1,5 +1,5 @@
-import FindUsOn from "../FindUsOn";
-import LoginWith from "../LoginWith";
+import LoginWith from "../components/LoginWith";
+import FindUsOn from "../components/FindUsOn";
 
 const RightNavbar = () => {
   return (
