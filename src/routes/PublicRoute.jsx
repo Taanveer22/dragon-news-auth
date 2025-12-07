@@ -43,6 +43,10 @@ const PublicRoute = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: <p>404 Not Found</p>,
+  },
 ]);
 
 export default PublicRoute;
