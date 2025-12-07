@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 // ====== step 01 (create context) ===========
@@ -22,10 +23,16 @@ const AuthProvider = ({ children }) => {
   const createNewUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  const signOutUser = () => {
+    return signOut(auth);
+  };
+
   const AuthInfo = {
     user,
     setUser,
     createNewUser,
+    signOutUser,
   };
 
   //=============== get the currently sign in user =================

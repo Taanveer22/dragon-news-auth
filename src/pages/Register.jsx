@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-  const { createNewUser, setUser } = useContext(AuthContext);
+  const { createNewUser, signOutUser, setUser } = useContext(AuthContext);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -16,16 +16,26 @@ const Register = () => {
     const password = form.get("password");
     console.log({ name, photoUrl, email, password });
 
+    // ======= create new user function ============
     createNewUser(email, password)
       .then((result) => {
         const userData = result.user;
         setUser(userData);
-        // console.log(userData);
+        console.log(userData);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+      });
+
+    // ======== sign out function ==========
+    signOutUser()
+      .then(() => {
+        console.log("sign out successful");
+      })
+      .catch(() => {
+        console.log("an error happened to sign out");
       });
   };
 
