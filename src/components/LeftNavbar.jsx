@@ -20,7 +20,7 @@ const LeftNavbar = () => {
       <div className="flex flex-col gap-4">
         {newsCategories.map((categoryItem) => (
           <NavLink
-            to={`/categoryType/${categoryItem.category_id}`}
+            to={`/category/${categoryItem.category_id}`}
             key={categoryItem.category_id}
             className="btn"
           >

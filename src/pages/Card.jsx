@@ -1,6 +1,7 @@
 import { FaRegEye } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
 import { FaShareNodes } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Card = ({ newsData }) => {
   // console.log(newsData);
@@ -41,7 +42,12 @@ const Card = ({ newsData }) => {
           <img src={newsData?.image_url || "N/A"} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <p>{newsData?.details.slice(0, 200) || "N/A"}</p>
+          <p className="text-justify text-sm">
+            {newsData?.details.slice(0, 200) || "N/A"}....
+          </p>
+          <p className="text-blue-500 underline font-medium text-lg">
+            <Link to={`/news/${newsData._id}`}>Read More</Link>
+          </p>
           <div className="card-actions justify-between">
             <div className="flex items-center gap-2">
               <div className="rating">

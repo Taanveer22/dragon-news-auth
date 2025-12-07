@@ -1,10 +1,10 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
-import NewsLayout from "../layouts/NewsLayout";
 import CenteredContent from "../pages/CenteredContent";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import CardDetail from "../pages/CardDetail";
 
 const PublicRoute = createBrowserRouter([
   {
@@ -13,10 +13,10 @@ const PublicRoute = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Navigate to={`/categoryType/01`}></Navigate>,
+        element: <Navigate to={`/category/01`}></Navigate>,
       },
       {
-        path: "/categoryType/:id",
+        path: "/category/:id",
         element: <CenteredContent></CenteredContent>,
         loader: ({ params }) =>
           fetch(
@@ -26,8 +26,10 @@ const PublicRoute = createBrowserRouter([
     ],
   },
   {
-    path: "/news",
-    element: <NewsLayout></NewsLayout>,
+    path: "/news/:id",
+    element: <CardDetail></CardDetail>,
+    loader: ({ params }) =>
+      fetch(`https://openapi.programming-hero.com/api/news/${params.id}`),
   },
   {
     path: "/auth",
