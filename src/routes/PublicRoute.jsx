@@ -2,6 +2,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 import NewsLayout from "../layouts/NewsLayout";
 import CenteredContent from "../pages/CenteredContent";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const PublicRoute = createBrowserRouter([
   {
@@ -25,6 +28,20 @@ const PublicRoute = createBrowserRouter([
   {
     path: "/news",
     element: <NewsLayout></NewsLayout>,
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout></AuthLayout>,
+    children: [
+      {
+        path: "/auth/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/auth/register",
+        element: <Register></Register>,
+      },
+    ],
   },
 ]);
 
