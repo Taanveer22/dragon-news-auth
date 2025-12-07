@@ -1,15 +1,49 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const { signInUser, setUser } = useContext(AuthContext);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log({ email, password });
+
+    // ==== sign in user function =====
+    signInUser(email, password)
+      .then((result) => {
+        const userData = result.user;
+        setUser(userData);
+        console.log(userData);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode, errorMessage);
+      });
+  };
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="card bg-base-100 w-full max-w-md shrink-0">
-        <form className="card-body">
+        <form onSubmit={handleFormSubmit} className="card-body">
           <fieldset className="fieldset">
             <label className="label">Email</label>
-            <input type="email" className="input" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              className="input"
+              placeholder="Email"
+            />
             <label className="label">Password</label>
-            <input type="password" className="input" placeholder="Password" />
+            <input
+              name="password"
+              type="password"
+              className="input"
+              placeholder="Password"
+            />
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
