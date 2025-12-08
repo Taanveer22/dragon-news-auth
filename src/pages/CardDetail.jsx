@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import Header from "../components/Header";
 import RightNavbar from "../components/RightNavbar";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const CardDetail = () => {
   const loaderData = useLoaderData();
@@ -26,11 +27,9 @@ const CardDetail = () => {
               <h2 className="card-title">{detailData?.title || "N/A"}</h2>
               <p className="text-justify">{detailData?.details || "N/A"}</p>
               <div className="card-actions">
-                <Link
-                  to={`/category/${detailData?.category_id}`}
-                  className="btn btn-error"
-                >
-                  All News In This Category
+                <Link className="btn btn-error" to={`/category/${detailData?.category_id}`}>
+                  <IoMdArrowRoundBack></IoMdArrowRoundBack>
+                  Back To This Category
                 </Link>
               </div>
             </div>

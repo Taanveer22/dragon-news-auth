@@ -7,8 +7,10 @@ import {
   signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+
 // ====== step 01 (create context) ===========
 const AuthContext = createContext();
+
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
@@ -19,17 +21,21 @@ const AuthProvider = ({ children }) => {
   // });
 
   const [user, setUser] = useState(null);
-  console.log(user);
+  const [loading, setLoading] = useState(true);
+  console.log(user, loading);
 
   const createNewUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -39,12 +45,15 @@ const AuthProvider = ({ children }) => {
     createNewUser,
     signOutUser,
     signInUser,
+    loading,
   };
 
   //=============== get the currently sign in user =================
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      // after load user loading status
+      setLoading(false);
     });
 
     return () => {
