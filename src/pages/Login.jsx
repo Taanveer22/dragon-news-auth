@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
   const { signInUser, setUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successText, setSuccessText] = useState("");
 
   const location = useLocation();
   // console.log(location);
@@ -17,18 +19,23 @@ const Login = () => {
     const password = e.target.password.value;
     console.log({ email, password });
 
+    // reset state status
+    setErrorMessage("");
+    setSuccessText("");
+
     // ==== sign in user function =====
     signInUser(email, password)
       .then((result) => {
         const userData = result.user;
         setUser(userData);
+        setSuccessText("login successfully done");
         // console.log(userData);
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorCode, errorMessage);
+        setErrorMessage(`${errorCode} : ${errorMessage}`);
       });
   };
   return (
@@ -42,6 +49,7 @@ const Login = () => {
               type="email"
               className="input"
               placeholder="Email"
+              required
             />
             <label className="label">Password</label>
             <input
@@ -49,6 +57,7 @@ const Login = () => {
               type="password"
               className="input"
               placeholder="Password"
+              required
             />
             <div>
               <a className="link link-hover">Forgot password?</a>
@@ -56,6 +65,12 @@ const Login = () => {
             <button className="btn btn-neutral mt-4">Login</button>
           </fieldset>
         </form>
+        {errorMessage && (
+          <p className="text-lg font-medium text-red-500">{errorMessage}</p>
+        )}
+        {successText && (
+          <p className="text-lg font-medium text-green-500">{successText}</p>
+        )}
         <div className="text-lg font-medium text-center">
           <span>Don't have an account? </span>
           <span className="text-red-500">

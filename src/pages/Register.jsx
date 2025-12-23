@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
   const { createNewUser, signOutUser, setUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successText, setSuccessText] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -16,26 +18,40 @@ const Register = () => {
     const password = form.get("password");
     console.log({ name, photoUrl, email, password });
 
+    // ====== reset state status ===
+    setErrorMessage("");
+    setSuccessText("");
+
+    // ====== validation ====
+    if (name.length < 4) {
+      setErrorMessage("name should be more than 4 characters");
+    }
+
+    if (password.length < 6) {
+      setErrorMessage("password should be more then 6 characters");
+    }
+
     // ======= create new user function ============
     createNewUser(email, password)
       .then((result) => {
         const userData = result.user;
         setUser(userData);
-        console.log(userData);
+        // console.log(userData);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        // console.log(errorCode, errorMessage);
+        setErrorMessage(`${errorCode} : ${errorMessage}`);
       });
 
     // ======== sign out function ==========
     signOutUser()
       .then(() => {
-        console.log("sign out successful");
+        setSuccessText("sign out successful");
       })
       .catch(() => {
-        console.log("an error happened to sign out");
+        setErrorMessage("an error happened to sign out");
       });
   };
 
@@ -75,6 +91,12 @@ const Register = () => {
             <button className="btn btn-neutral mt-4">Register</button>
           </fieldset>
         </form>
+        {errorMessage && (
+          <p className="text-lg font-medium text-red-500">{errorMessage}</p>
+        )}
+        {successText && (
+          <p className="text-lg font-medium text-red-500">{successText}</p>
+        )}
         <div className="text-lg font-medium text-center">
           <span>Already have an account? </span>
           <span className="text-red-500">
