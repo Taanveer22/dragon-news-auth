@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-  const { createNewUser, signOutUser, setUser } = useContext(AuthContext);
+  const { createNewUser, signOutUser, setUser, updateProfileForUser } =
+    useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [successText, setSuccessText] = useState("");
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -13,10 +15,10 @@ const Register = () => {
     const form = new FormData(e.target);
     console.log(form);
     const name = form.get("name");
-    const photoUrl = form.get("photo-url");
+    const photo = form.get("photo");
     const email = form.get("email");
     const password = form.get("password");
-    console.log({ name, photoUrl, email, password });
+    console.log({ name, photo, email, password });
 
     // ====== reset state status ===
     setErrorMessage("");
@@ -37,6 +39,14 @@ const Register = () => {
         const userData = result.user;
         setUser(userData);
         // console.log(userData);
+        // update profile for user
+        updateProfileForUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            navigate("/");
+          })
+          .catch((error) => {
+            setErrorMessage(error.message);
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -67,9 +77,9 @@ const Register = () => {
               className="input"
               placeholder="Name"
             />
-            <label className="label">Photo Url</label>
+            <label className="label">Photo</label>
             <input
-              name="photo-url"
+              name="photo"
               type="text"
               className="input"
               placeholder="Photo Url"
