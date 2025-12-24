@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Privacy from "../components/Privacy";
 
 const AuthLayout = () => {
   return (
@@ -7,6 +8,9 @@ const AuthLayout = () => {
       <header className="w-11/12 mx-auto py-5">
         <Navbar></Navbar>
       </header>
+      <div>
+        <Privacy></Privacy>
+      </div>
       <main>
         <Outlet></Outlet>
       </main>

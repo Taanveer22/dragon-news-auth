@@ -16,8 +16,8 @@ const Card = ({ newsData }) => {
 
   return (
     <>
-      <div className="card bg-base-100 shadow-sm">
-        <div className="card-actions justify-between items-center bg-gray-200 p-2">
+      <div className="card bg-base-300 shadow-sm">
+        <div className="card-actions justify-between items-center bg-gray-400 p-2">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <img
