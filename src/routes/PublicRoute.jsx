@@ -52,7 +52,11 @@ const PublicRoute = createBrowserRouter([
   },
   {
     path: "*",
-    element: <p>404 Not Found</p>,
+    element: (
+      <p className="text-red-500 text-7xl font-bold text-center">
+        404 Not Found
+      </p>
+    ),
   },
 ]);
 

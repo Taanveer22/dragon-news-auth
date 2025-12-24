@@ -2,8 +2,10 @@ import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -16,14 +18,14 @@ const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  // const [user, setUser] = useState({
-  //   name: "taanveer",
-  //   email: "tv469@gmail.com",
-  // });
-
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   // console.log(user, loading);
+
+  const googleProvider = new GoogleAuthProvider();
+  const googleSignIn = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
 
   const createNewUser = (email, password) => {
     setLoading(true);
@@ -46,12 +48,12 @@ const AuthProvider = ({ children }) => {
 
   const AuthInfo = {
     user,
-    setUser,
+    loading,
+    googleSignIn,
     createNewUser,
     signOutUser,
     signInUser,
-    loading,
-    updateProfileForUser
+    updateProfileForUser,
   };
 
   //=============== get the currently sign in user =================

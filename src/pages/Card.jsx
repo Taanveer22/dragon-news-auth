@@ -2,9 +2,12 @@ import { FaRegEye } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa";
 import { FaShareNodes } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Card = ({ newsData }) => {
   // console.log(newsData);
+  const { user } = useContext(AuthContext);
 
   // Check if newsData exists before rendering
   if (!newsData) {
@@ -18,18 +21,22 @@ const Card = ({ newsData }) => {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
               <img
-                src={newsData?.author?.img || "N/A"}
+                src={newsData?.author?.img || "https://placehold.co/10x10"}
                 className="w-10 h-10 rounded-full"
               />
               <div className="">
                 <h1>{newsData?.author?.name || "N/A"}</h1>
                 <p>
                   {new Date(
-                    newsData?.author?.published_date || "N/A"
-                  ).toLocaleDateString()}
+                    newsData?.author?.published_date
+                  ).toLocaleDateString() || "N/A"}
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="text-xl font-medium">
+            <p>{user?.displayName}</p>
           </div>
 
           <div className="flex items-center gap-2">
@@ -39,7 +46,7 @@ const Card = ({ newsData }) => {
         </div>
         <h2 className="card-title my-3">{newsData?.title || "N/A"}</h2>
         <figure>
-          <img src={newsData?.image_url || "N/A"} alt="Shoes" />
+          <img src={newsData?.image_url || "https://placehold.co/600x400"} />
         </figure>
         <div className="card-body">
           <p className="text-justify text-sm">
@@ -84,14 +91,14 @@ const Card = ({ newsData }) => {
                 />
               </div>
               <button className="btn btn-ghost">
-                {newsData?.rating?.number || "N/A"}
+                {newsData?.rating?.number || 0}
               </button>
             </div>
 
             <div className="flex items-center gap-2">
               <FaRegEye></FaRegEye>
               <button className="btn btn-ghost">
-                {newsData?.total_view || "N/A"}{" "}
+                {newsData?.total_view || 0}
               </button>
             </div>
           </div>

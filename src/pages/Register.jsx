@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const { createNewUser, signOutUser, setUser, updateProfileForUser } =
+  const { createNewUser, signOutUser, updateProfileForUser } =
     useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
-  const [successText, setSuccessText] = useState("");
   const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
@@ -22,7 +22,6 @@ const Register = () => {
 
     // ====== reset state status ===
     setErrorMessage("");
-    setSuccessText("");
 
     // ====== validation ====
     if (name.length < 4) {
@@ -35,33 +34,29 @@ const Register = () => {
 
     // ======= create new user function ============
     createNewUser(email, password)
-      .then((result) => {
-        const userData = result.user;
-        setUser(userData);
-        // console.log(userData);
+      .then(() => {
+        toast.success("register user done");
         // update profile for user
         updateProfileForUser({ displayName: name, photoURL: photo })
           .then(() => {
             navigate("/");
+            toast.success("profile updated");
           })
-          .catch((error) => {
-            setErrorMessage(error.message);
+          .catch(() => {
+            toast.error("profile not updated");
           });
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // console.log(errorCode, errorMessage);
-        setErrorMessage(`${errorCode} : ${errorMessage}`);
+      .catch(() => {
+        toast.error("failed to register user");
       });
 
     // ======== sign out function ==========
     signOutUser()
       .then(() => {
-        setSuccessText("sign out successful");
+        toast.success("sign out successful");
       })
       .catch(() => {
-        setErrorMessage("an error happened to sign out");
+        toast.error("sign out failed");
       });
   };
 
@@ -103,9 +98,6 @@ const Register = () => {
         </form>
         {errorMessage && (
           <p className="text-lg font-medium text-red-500">{errorMessage}</p>
-        )}
-        {successText && (
-          <p className="text-lg font-medium text-red-500">{successText}</p>
         )}
         <div className="text-lg font-medium text-center">
           <span>Already have an account? </span>
