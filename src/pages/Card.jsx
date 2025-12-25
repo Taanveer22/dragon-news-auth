@@ -8,10 +8,15 @@ import { AuthContext } from "../provider/AuthProvider";
 const Card = ({ newsData }) => {
   // console.log(newsData);
   const { user } = useContext(AuthContext);
+  // console.log(user);
 
   // Check if newsData exists before rendering
   if (!newsData) {
-    return <div>Loading news data...</div>;
+    return (
+      <div className="text-yellow-500 text-4xl font-bold">
+        Loading card news data...
+      </div>
+    );
   }
 
   return (

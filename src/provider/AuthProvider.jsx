@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
 
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -43,6 +44,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateProfileForUser = (updatedData) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, updatedData);
   };
 
@@ -59,6 +61,7 @@ const AuthProvider = ({ children }) => {
   //=============== get the currently sign in user =================
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // observer set the current user on every login
       setUser(currentUser);
       // after load user loading status
       setLoading(false);
